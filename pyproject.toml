@@ -117,6 +117,8 @@ select = [
     "D",
     "F", # Pyflakes
     "E", "W", # pycodestyle
+    "C90", # mccabe
+    "I", # isort
     "S", # flake8-bandit
     "Q", # flake8-quotes
     "G", # flake8-logging-format
