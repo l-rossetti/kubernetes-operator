@@ -319,7 +319,7 @@ class ConnectorSpec(BaseModel):
             return self
 
         # Default to having `image`
-        return self.model_copy(update=dict(image=ConnectorImage()))
+        return self.model_copy(update={"image": ConnectorImage()})
 
     def get_image(self) -> str:
         if image := self.image:

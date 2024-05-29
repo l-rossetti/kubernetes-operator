@@ -49,12 +49,12 @@ def get_connector_and_crd(connector_factory):
         crd = TwingateConnectorCRD(
             api_version="twingate.com/v1beta",
             kind="TwingateConnector",
-            metadata=dict(
-                uid="123",
-                name=connector_spec.name,
-                namespace="default",
-                annotations=annotations,
-            ),
+            metadata={
+                "uid": "123",
+                "name": connector_spec.name,
+                "namespace": "default",
+                "annotations": annotations,
+            },
             spec=spec,
             status=status,
         )
@@ -115,7 +115,7 @@ def test_twingate_connector_create_with_imagepolicy_sets_check_annotation(
     get_connector_and_crd, kopf_handler_runner, mock_api_client
 ):
     connector, crd = get_connector_and_crd(
-        spec_overrides=dict(image_policy=ConnectorImagePolicy())
+        spec_overrides={"image_policy": ConnectorImagePolicy()}
     )
 
     mock_api_client.connector_create.return_value = connector
@@ -318,7 +318,7 @@ class TestTwingateConnectorPodReconciler_ImagePolicy:
         mock_get_image,
     ):
         connector, crd = get_connector_and_crd(
-            spec_overrides=dict(image_policy=ConnectorImagePolicy()),
+            spec_overrides={"image_policy": ConnectorImagePolicy()},
             status={"twingate_connector_create": {"success": True}},
             with_id=True,
         )
@@ -345,7 +345,7 @@ class TestTwingateConnectorPodReconciler_ImagePolicy:
         mock_get_image,
     ):
         connector, crd = get_connector_and_crd(
-            spec_overrides=dict(image_policy=ConnectorImagePolicy()),
+            spec_overrides={"image_policy": ConnectorImagePolicy()},
             status={"twingate_connector_create": {"success": True}},
             annotations={ANNOTATION_NEXT_VERSION_CHECK: "2000-01-01T00:00:00Z"},
             with_id=True,
@@ -375,7 +375,7 @@ class TestTwingateConnectorPodReconciler_ImagePolicy:
     ):
         now = pendulum.now("UTC").start_of("minute")
         connector, crd = get_connector_and_crd(
-            spec_overrides=dict(image_policy=ConnectorImagePolicy()),
+            spec_overrides={"image_policy": ConnectorImagePolicy()},
             status={"twingate_connector_create": {"success": True}},
             annotations={ANNOTATION_NEXT_VERSION_CHECK: str(now.add(minutes=1))},
             with_id=True,
