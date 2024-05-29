@@ -113,12 +113,18 @@ markers = [
 
 [tool.ruff.lint]
 select = [
-    "D",
+    "D", # pydocstyle
     "F", # Pyflakes
     "E", "W", # pycodestyle
     "C90", # mccabe
     "I", # isort
+    "UP", # pyupgrade
+    "YTT", # flake8-2020
+    "ASYNC", # flake8-async
+    "TRIO", # flake8-trio
     "S", # flake8-bandit
+    "BLE", # flake8-blind-except
+    "C4", # flake8-comprehensions
     "Q", # flake8-quotes
     "G", # flake8-logging-format
     "B", # flake8-bugbear
